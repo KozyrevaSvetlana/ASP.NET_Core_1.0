@@ -1,0 +1,16 @@
+﻿@model ChangeRoleViewModel
+
+<h2>Изменение ролей для пользователя @Model.UserName</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="userName" value="@Model.UserName" />
+    <div class="validatoin py-2" asp-validation-summary="All"></div>
+    <div class="form-group">
+        @foreach (var role in Model.AllRoles)
+        {
+            <input type="checkbox" name="roles" value="@role.Name"
+                   @(Model.UserRoles.Contains(role) ? "checked=\"checked\"" : "") />@role.Name <br />
+            }
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

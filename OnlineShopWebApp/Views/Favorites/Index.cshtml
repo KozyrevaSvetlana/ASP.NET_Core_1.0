@@ -1,0 +1,59 @@
+﻿@model FavoritesViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container py-3">
+    <div class="row py-1">
+        <h1 class="display-4">Избранные товары</h1>
+    </div>
+    @if (Model == null || Model.Items.Count == 0)
+    {
+        <h2>Добавьте товар в избранное</h2>
+        <p>
+            В этом списке будут храниться товары, которые Вас заинтересовали.<br />
+            Можете добавить сюда недавно просмотренные товары.<br />
+            <strong>Внимание!</strong><br />
+            Чтобы сохранить список и иметь доступ к нему с различных устройств,
+            необходимо авторизоваться или зарегистрироваться.
+        </p>
+        <div class="row py-3">
+            <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="Index" role="button">Вернуться на главную страницу</a>
+        </div>
+    }
+    else
+    {
+        <div class="row py-3">
+            @foreach (var product in Model.Items)
+            {
+                <div class="col-4 card shadow py-4">
+                    <div>
+                        <img class="card-img-top" href="@product.Image" src="@product.Image" alt="@product.Name" />
+                        <div class="card-body">
+                            <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a>
+                            <p class="font-weight-light">@product.Cost ₽</p>
+                            <p class="font-italic">@product.Description</p>
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                            <a type="button" class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">В корзину</a>
+                            <a class="btn btn-danger" asp-area="" asp-controller="Favorites" asp-action="Delete" asp-route-id="@product.Id" role="button">Удалить товар</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="text-left">
+                <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="Index" role="button">Продолжить покупки</a>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Favorites" asp-action="Clear" role="button">Очистить список</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+

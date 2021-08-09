@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ProductViewModel>
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h2>Продукты</h2>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <p>Продуктов нет</p>
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="AddProduct" role="button">Добавить новый продукт</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="AddProduct" role="button">Добавить новый продукт</a>
+                        </div>
+                        <br />
+                        <table class="table">
+                            @{ int i = 1;}
+                            <thead>
+                                <tr>
+                                    <th scope="col">№</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Название продукта</th>
+                                    <th scope="col">Цена</th>
+                                    <th scope="col">Статус</th>
+                                    <th scope="col">Действия</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    @if (product.isDeleted)
+                                    {
+                                        <tr class="table-secondary">
+                                            <th scope="row">@i</th>
+                                            <td>@product.Id</td>
+                                            <td>@product.Name</td>
+                                            <td>@product.Cost</td>
+                                            <td style="color:red">Удален</td>
+                                            <td>
+                                                <a class="btn btn-secondary" asp-area="Admin" asp-controller="Products" asp-action="Restore" asp-route-Id="@product.Id">Восстановить</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <th scope="row">@i</th>
+                                            <td>@product.Id</td>
+                                            <td>@product.Name</td>
+                                            <td>@product.Cost</td>
+                                            <td>Активен</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Подробнее
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Products" asp-action="Description" asp-route-Id="@product.Id">Описание</a>
+                                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Products" asp-action="EditForm" asp-route-Id="@product.Id">Редактировать</a>
+                                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Products" asp-action="DeleteProduct" asp-route-Id="@product.Id">Удалить</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

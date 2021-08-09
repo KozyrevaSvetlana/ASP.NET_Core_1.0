@@ -1,0 +1,72 @@
+﻿@model UserViewModel
+
+<div class="row py-5">
+    <div class="col-2">
+        @await Html.PartialAsync("ProfileLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h4>Контактные данные</h4>
+                    @if (Model.Contacts != null)
+                    {
+                        <div>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    @if (Model.Contacts.ContactsName != "")
+                                    {
+                                        <tr>
+                                            <th scope="col">Имя</th>
+                                            <th scope="col">@Model.Contacts.ContactsName</th>
+                                        </tr>
+                                    }
+                                    @if (Model.Contacts.Surname != "")
+                                    {
+                                        <tr>
+                                            <th scope="col">Фамилия</th>
+                                            <th scope="col">@Model.Contacts.Surname</th>
+
+                                        </tr>
+                                    }
+                                    @if (Model.Contacts.Email != "")
+                                    {
+                                        <tr>
+                                            <th scope="col">Электронная почта</th>
+                                            <th scope="col">@Model.Contacts.Email</th>
+                                        </tr>
+                                    }
+                                    @if (Model.Contacts.PhoneNumber != "")
+                                    {
+                                        <tr>
+                                            <th scope="col">Телефон</th>
+                                            <th scope="col">@Model.Contacts.PhoneNumber</th>
+                                        </tr>
+                                    }
+                                    @if (Model.Contacts.Adress != "")
+                                    {
+                                        <tr>
+                                            <th scope="col">Адрес</th>
+                                            <th scope="col">@Model.Contacts.Adress</th>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @if (ViewBag.Empty != null)
+                            {
+                                foreach (var emptyContact in ViewBag.Empty)
+                                {
+                                    <p class="badge badge-danger">@emptyContact</p>
+                                    <br />
+                                }
+                            }
+                        </div>
+                    }
+                    <div>
+                        <a class="btn btn-secondary" asp-area="" asp-controller="Profile" asp-action="AddContacts" asp-route-userName="@Model.Login.Name">Изменить контактные данные</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

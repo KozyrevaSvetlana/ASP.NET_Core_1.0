@@ -1,0 +1,53 @@
+﻿@model UserContactViewModel
+@{string id = ViewBag.Id;}
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="list-group d-flex align-items-center py-5">
+                        <h4>Редактирование</h4>
+                        <div class="validatoin badge badge-danger" asp-validation-summary="ModelOnly"></div>
+                        <form method="post" class="form-group">
+                            <div>
+                                <label asp-for="ContactsName">Имя</label>
+                                <input asp-for="ContactsName" type="text" class="form-control" name="ContactsName" tabindex="1" value="@Model.ContactsName">
+                                <span class="badge badge-danger" asp-validation-for="ContactsName"></span>
+                            </div>
+                            <div>
+                                <label asp-for="Surname">Фамилия</label>
+                                <input asp-for="Surname" type="text" class="form-control" name="Surname" tabindex="2" value="@Model.Surname">
+                                <span class="badge badge-danger" asp-validation-for="Surname"></span>
+                            </div>
+                            <div>
+                                <label asp-for="Adress">Адрес</label>
+                                <input asp-for="Adress" class="form-control" type="text" name="Adress" tabindex="3" value="@Model.Adress">
+                                <span class="badge badge-danger" asp-validation-for="Adress"></span>
+                            </div>
+                            <div>
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" type="email" name="Email" tabindex="4" value="@Model.Email">
+                                <span class="badge badge-danger" asp-validation-for="Email"></span>
+                            </div>
+                            <div>
+                                <label asp-for="PhoneNumber">Телефон</label>
+                                <input asp-for="PhoneNumber" class="form-control" type="tel" name="PhoneNumber" tabindex="5" value="@Model.PhoneNumber">
+                                <span class="badge badge-danger" asp-validation-for="PhoneNumber"></span>
+                            </div>
+                            <div>
+                                <input type="hidden" name="userId" value="@id" />
+                                <span>
+                                    <button type="submit" class="btn btn-primary" asp-area="Admin" asp-controller="Users" asp-action="ChangeContacts" tabindex="6">Изменить</button>
+                                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="Index" tabindex="7">Отменить</a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

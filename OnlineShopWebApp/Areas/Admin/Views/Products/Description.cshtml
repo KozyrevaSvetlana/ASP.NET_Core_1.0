@@ -1,0 +1,55 @@
+﻿@model ProductViewModel
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h4>Описание товара</h4>
+                    @if (Model == null)
+                    {
+                        <div class="card-body">
+                            <p>Извините, товар не найден</p>
+                            <a class="btn btn-info" asp-area="Admin" asp-controller="Home" asp-action="Index" role="button">Вернуться на главную страницу</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-6">
+                                <img class="card-img-top" href="@Model.Image" src="@Model.Image" alt="@Model.Name" />
+                            </div>
+                            <div class="col-6">
+
+
+                                <div class="row">
+                                    <div class="text-left">
+                                        <p>@Model.Name</p>
+                                        <p>@Model.Cost руб</p>
+                                        <p>@Model.Description</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div>
+                                        <a class="btn btn-success" asp-area="Admin" asp-controller="Products" asp-action="EditForm" asp-route-Id="@Model.Id" role="button">Изменить</a>
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <a class="btn btn-danger" asp-area="Admin" asp-controller="Products" asp-action="DeleteProduct" asp-route-Id="@Model.Id" role="button">Удалить</a>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-info" asp-area="Admin" asp-controller="Home" asp-action="Index" role="button">Вернуться в панель администратора</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

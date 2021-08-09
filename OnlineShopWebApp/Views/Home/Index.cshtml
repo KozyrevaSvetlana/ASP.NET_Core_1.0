@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ProductViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div><h1 class="display-4">Все товары</h1></div>
+<div class="row gx-4 gx-lg-5">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div><img class="card-img-top" href="@product.Image" src="@product.Image" alt="@product.Name" /></div>
+                    <h2 class="card-title"><a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></h2>
+                    <div>
+                        <p class="font-weight-normal">@product.Description.Substring(0, product.Description.Length / 2) <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">Подробнее</a></p>
+                    </div>
+                    <p class="font-weight-normal">@product.Cost ₽</p>
+                </div>
+                <form method="post">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="submit" class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">В корзину</button>
+                        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Favorites" asp-action="Add" asp-route-id="@product.Id">В избранное</a>
+                        <a type="button" class="btn btn-info" asp-area="" asp-controller="Compare" asp-action="Add" asp-route-id="@product.Id">Сравнить</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+

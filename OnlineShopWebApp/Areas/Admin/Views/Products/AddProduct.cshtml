@@ -1,0 +1,43 @@
+﻿@model AddProductViewModel
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h4>Добавление нового продукта</h4>
+                    <form method="post" class="form-group py-3" enctype="multipart/form-data">
+                        <div class="validatoin badge badge-danger" asp-validation-summary="ModelOnly"></div>
+                        <div>
+                            <label asp-for="Name">Название</label>
+                            <input asp-for="Name" type="text" class="form-control" name="Name" tabindex="1">
+                            <span class="badge badge-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div>
+                            <label asp-for="Cost">Цена</label>
+                            <input asp-for="Cost" type="number" class="form-control" name="Cost" tabindex="2" value="" min="1">
+                            <span class="badge badge-danger" asp-validation-for="Cost"></span>
+                        </div>
+                        <div>
+                            <label asp-for="Description">Описание</label>
+                            <textarea asp-for="Description" class="form-control" type="text" name="Description" cols="30" rows="10" tabindex="3" value=""></textarea>
+                            <span class="badge badge-danger" asp-validation-for="Description"></span>
+                        </div>
+                        <br />
+                        <div>
+                            <label asp-for="Description">Добавить изображения</label>
+                            <input type="file" name="UploadedFiles" class="form-control" multiple />
+                            <span>
+                                <button type="submit" class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="AddNewProduct" tabindex="5">Добавить</button>
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="Index" tabindex="6">Отменить</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

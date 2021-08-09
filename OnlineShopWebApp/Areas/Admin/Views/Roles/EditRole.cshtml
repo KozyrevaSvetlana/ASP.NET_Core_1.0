@@ -1,0 +1,29 @@
+﻿@model RoleViewModel
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <h4>Редактирование @Model.Name</h4>
+                <form method="post" class="form-group">
+                    <div class="validatoin badge badge-danger" asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <label asp-for="Name">Новое название</label>
+                        <input asp-for="Name" type="text" class="form-control" name="newName" tabindex="1" value="">
+                        <span class="badge badge-danger" asp-validation-for="Name"></span>
+                    </div>
+                    <input type="hidden" name="roleId" value="@Model.Id" />
+                    <div>
+                        <span>
+                            <button type="submit" class="btn btn-primary" asp-area="Admin" asp-controller="Roles" asp-action="ChangeRole" tabindex="2">Изменить</button>
+                            <a class="btn btn-danger" asp-area="Admin" asp-controller="Roles" asp-action="Index" tabindex="3">Отменить</a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

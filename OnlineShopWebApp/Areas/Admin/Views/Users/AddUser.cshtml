@@ -1,0 +1,41 @@
+﻿@model Register
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row py-3">
+            <div class="col-5">
+                <div class="py-1">
+                    <h1>Регистрация</h1>
+                </div>
+                <form method="post" class="form-group">
+                    <div class="validatoin" asp-validation-summary="All"></div>
+                    <div class="py-1">
+                        <div>
+                            <label asp-for="Name">Логин</label>
+                        </div>
+                        <input class="container-fluid" asp-for="Name" type="text" name="Name" tabindex="1">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="py-1">
+                        <div>
+                            <label asp-for="Password">Пароль</label>
+                        </div>
+                        <input class="container-fluid" asp-for="Password" type="password" name="Password" tabindex="2">
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div class="py-1">
+                        <div>
+                            <label asp-for="CheckPassword">Подтверждение пароля</label>
+                        </div>
+                        <input class="container-fluid" asp-for="CheckPassword" type="password" name="CheckPassword" tabindex="3">
+                        <span asp-validation-for="CheckPassword"></span>
+                    </div>
+                    <button type="submit" class="btn btn-dark container-fluid" asp-area="Admin" asp-controller="Users" asp-action="AddUser" tabindex="4">Добавить нового пользователя</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

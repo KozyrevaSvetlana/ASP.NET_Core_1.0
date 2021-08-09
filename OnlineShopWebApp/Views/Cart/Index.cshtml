@@ -1,0 +1,62 @@
+﻿@model CartViewModel
+
+@if (Model == null || Model.Items.Count == 0)
+{
+    <div>
+        <p>Упс, корзина пуста</p>
+        <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="Index" role="button">Вернуться на главную страницу</a>
+    </div>
+}
+else
+{
+    <h1 class="display-4">Корзина</h1>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr class="text-center">
+                    <th>Номер</th>
+                    <th>Название</th>
+                    <th>Цена, руб.</th>
+                    <th></th>
+                    <th>Количество</th>
+                    <th></th>
+                    <th>Стоимость</th>
+                </tr>
+                @{ int i = 1;}
+                @foreach (var item in Model.Items)
+                {
+                    <tr class="text-center">
+                        <th>@i</th>
+                        <th>@item.Product.Name</th>
+                        <th>@item.Product.Cost</th>
+                        <th>
+                            <a type="button" class="btn btn-secondary" asp-area="" asp-controller="cart" asp-action="ChangeAmount" asp-route-id="@item.Product.Id" asp-route-sign="1">+</a>
+                        </th>
+                        <th>@item.Amount</th>
+                        <th>
+                            <a type="button" class="btn btn-secondary" asp-area="" asp-controller="cart" asp-action="ChangeAmount" asp-route-id="@item.Product.Id" asp-route-sign="-1">-</a>
+                        </th>
+                        <th>@item.Cost</th>
+                        @{i++;}
+                    </tr>
+                }
+            </table>
+            <div class="text-right">
+                <h3>Итого:</h3>
+                <h3>@Model.Cost</h3>
+            </div>
+        </div>
+    </div>
+    <div class="text-left">
+        <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" asp-controller="Order" asp-action="Index" role="button">Оформить заказ</a>
+            <a class="btn btn-dark" asp-controller="Home" asp-action="Index" role="button">Продолжить покупки</a>
+            <a class="btn btn-danger" asp-controller="cart" asp-action="Clear" role="button">Очистить корзину</a>
+        </div>
+    </div>
+}
+
+
+
+
+

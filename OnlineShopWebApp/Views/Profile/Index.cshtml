@@ -1,0 +1,23 @@
+﻿@model UserViewModel
+<div class="row py-5">
+    <div class="col-2">
+        <div class="py-4 text-center">
+            @{ string image = (@Model.Image != null ? Model.Image : "/img/profile.webp");}
+            <img class="rounded-circle" src="@image" width="72" height="72" alt="@Model.Login.Name">
+            <div class="py-3">
+                <a class="btn btn-secondary py-2" asp-area="" asp-controller="Profile" asp-action="ChangeProfileImage">Изменить фото</a>
+            </div>
+        </div>
+        @await Html.PartialAsync("ProfileLeftMenu")
+    </div>
+    <div class="col-10">
+
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h4>Выберите нужную категорию</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

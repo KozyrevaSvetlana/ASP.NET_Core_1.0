@@ -1,0 +1,53 @@
+﻿@model Login
+
+<div class="row py-3">
+    <div class="col-5">
+        <h1>Вход</h1>
+        <form method="post" class="form-group">
+            @if (Model != null)
+            {
+                <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+            }
+            <div class="validatoin" asp-validation-summary="ModelOnly"></div>
+            <div class="py-1">
+                <label asp-for="Name">Email</label>
+                <div>
+                    <input class="container-fluid" asp-for="Name" type="text" name="Name" tabindex="1">
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="py-1">
+                <label asp-for="Password">Пароль</label>
+                <div>
+                    <input class="container-fluid" asp-for="Password" type="password" name="Password" tabindex="2">
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+            <div>
+                <input checked type="checkbox" class="form-check-input" name="rememberMe" value="true">
+                <label class="form-check-label py-1" for="dropdownCheck">
+                    Запомнить меня?
+                </label>
+            </div>
+            <div>
+                    <button type="submit" class="btn btn-dark container-fluid py-2" asp-controller="Login" asp-action="CheckIn" tabindex="3">Войти</button>
+            </div>
+            <div class="row container-fluid">
+                <div class="container-fluid py-2">
+                    <div class="btn-group-vertical container-fluid" role="group" aria-label="Basic example">
+                        @if (Model == null)
+                        {
+                        <a class="btn btn-outline-dark container-fluid" asp-area="" asp-controller="Login" asp-action="RegIndex">Регистрация нового пользователя</a>
+                        }
+                        else
+                        {
+                        <a class="btn btn-outline-dark container-fluid" asp-area="" asp-controller="Login" asp-action="RegIndex" asp-route-returnUrl="@Model.ReturnUrl">Регистрация нового пользователя</a>
+                        }
+                        <a class="btn btn-outline-dark container-fluid" asp-area="" asp-controller="#" asp-action="#">Забыли пароль?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

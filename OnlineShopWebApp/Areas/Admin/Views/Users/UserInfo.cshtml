@@ -1,0 +1,44 @@
+﻿@model UserViewModel
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <h4>Пользователь @Model.Login.Name</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Email(логин)</th>
+                            <th scope="col">Номер телефона</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">@Model.Login.Name</th>
+                            <td>@Model.Contacts.Surname</td>
+                            <td>@Model.Contacts.Email</td>
+                            <td>@Model.Contacts.PhoneNumber</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Действия
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangePassword" asp-route-name="@Model.Login.Name">Сменить пароль</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="EditUser" asp-route-name="@Model.Login.Name">Редактирование данных</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangeRole" asp-route-name="@Model.Login.Name">Права доступа</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="DeleteUser" asp-route-name="@Model.Login.Name">Удалить пользователя</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h2>Роли</h2>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <p>Ролей нет</p>
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Roles" asp-action="AddRole" role="button">Добавить новую роль</a>
+                        </div>
+                        <br />
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Roles" asp-action="AddRole" role="button">Добавить новую роль</a>
+                        </div>
+                        <div class="validatoin badge badge-danger py-5" asp-validation-summary="ModelOnly"></div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="auto">Список ролей</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 1;}
+                                @foreach (var role in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@i</th>
+                                        <td>@role.Name</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Подробнее
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Roles" asp-action="EditRole" asp-route-id="@role.Id">Редактировать</a>
+                                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Roles" asp-action="DeleteRole" asp-route-id="@role.Id">Удалить</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        @{i++;}
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

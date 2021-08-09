@@ -1,0 +1,30 @@
+﻿@model CartViewModel
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr class="text-center">
+            <th>Номер</th>
+            <th>Название</th>
+            <th>Цена, руб.</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+        </tr>
+        @{ int i = 1; decimal totalCost = 0;}
+        @foreach (var item in Model.Items)
+        {
+            <tr class="text-center">
+                <th>@i</th>
+                <th>@item.Product.Name</th>
+                <th>@item.Product.Cost</th>
+                <th>@item.Amount</th>
+                <th>@item.Cost</th>
+                @{i++; totalCost += item.Cost;}
+            </tr>
+        }
+    </table>
+    <div class="text-right">
+        <h3>Итого:</h3>
+        <h3>@totalCost руб.</h3>
+    </div>
+}

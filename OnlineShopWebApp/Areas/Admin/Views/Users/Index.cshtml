@@ -1,0 +1,70 @@
+﻿@model IEnumerable<UserViewModel>
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center py-5">
+                    <h2>Пользователи</h2>
+                    <div class="validatoin badge badge-danger" asp-validation-summary="ModelOnly"></div>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <p>Пользователей нет</p>
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Users" asp-action="AddUser" role="button">Добавить нового пользователя</a>
+                        </div>
+                        <br />
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Users" asp-action="AddUser" role="button">Добавить нового пользователя</a>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">№</th>
+                                    <th scope="col">Логин</th>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Фамилия</th>
+                                    <th scope="col">Телефон</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 1;}
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td scope="row">@i</td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Users" asp-action="UserInfo" asp-route-name="@user.Login.Name" role="button">@user.Login.Name</a>
+                                        </td>
+                                        <td>@user.Contacts.ContactsName</td>
+                                        <td>@user.Contacts.Surname</td>
+                                        <td>@user.Contacts.PhoneNumber</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Действия
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangePassword" asp-route-userName="@user.Login.Name">Сменить пароль</a>
+                                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="EditForm" asp-route-name="@user.Login.Name">Редактирование данных</a>
+                                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Roles" asp-route-userName="@user.Login.Name">Права доступа</a>
+                                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="DeleteUser" asp-route-name="@user.Login.Name">Удалить пользователя</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

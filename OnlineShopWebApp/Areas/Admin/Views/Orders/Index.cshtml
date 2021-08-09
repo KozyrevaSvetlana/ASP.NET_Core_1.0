@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OrderViewModel>
+
+<div class="row">
+    <div class="col-2">
+        @await Html.PartialAsync("AdminLeftMenu")
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col">
+                <div class="list-group d-flex align-items-center">
+                    <h2>Заказы</h2>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <p>Заказов нет</p>
+                    }
+                    else
+                    {
+                        <br />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">№</th>
+                                    <th scope="col">Номер заказа</th>
+                                    <th scope="col">Сумма</th>
+                                    <th scope="col">Статус</th>
+                                    <th scope="col">email пользователя</th>
+                                    <th scope="col">телефон</th>
+                                    <th scope="col">Дата</th>
+                                    <th scope="col">Время</th>
+                                    <th scope="col">Комментарий</th>
+                                    <th scope="col">Подробнее</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 1;
+                                    string status;}
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        @{status = order.InfoStatus.GetStatus(order.InfoStatus.StatusOrder);}
+                                        <th scope="row">@i</th>
+                                        <td>@order.Number</td>
+                                        <td>@order.Cost</td>
+                                        <td>@status</td>
+                                        <td>@order.User.Email</td>
+                                        <td>@order.User.PhoneNumber</td>
+                                        <td>@order.InfoStatus.Data.ToShortDateString()</td>
+                                        <td>@order.InfoStatus.Data.ToLongTimeString()</td>
+                                        <td>@order.Comment</td>
+                                        <td>
+                                            <a class="btn btn-primary" asp-area="Admin" asp-controller="Orders" asp-action="OrderForm" asp-route-number="@order.Number" tabindex="6">Подробнее</a>
+                                        </td>
+                                        @{i++;}
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
